@@ -64,6 +64,8 @@ class MainFragment : BrowseSupportFragment() {
             CourseCategory(
                 id = "math",
                 name = "数学课程",
+                grade = 9,
+                subject = "数学",
                 videos = listOf(
                     Video(
                         id = "1",
@@ -72,14 +74,17 @@ class MainFragment : BrowseSupportFragment() {
                         videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-1.mp4",
                         thumbnailUrl = "https://via.placeholder.com/320x180/4CAF50/FFFFFF?text=数学",
                         duration = "45:30",
-                        category = "数学",
+                        subject = "数学",
+                        grade = 9,
                         instructor = "张教授"
                     )
                 )
             ),
             CourseCategory(
                 id = "physics",
-                name = "物理课程", 
+                name = "物理课程",
+                grade = 10,
+                subject = "物理",
                 videos = listOf(
                     Video(
                         id = "2",
@@ -88,7 +93,8 @@ class MainFragment : BrowseSupportFragment() {
                         videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-2.mp4",
                         thumbnailUrl = "https://via.placeholder.com/320x180/2196F3/FFFFFF?text=物理",
                         duration = "50:15",
-                        category = "物理",
+                        subject = "物理",
+                        grade = 10,
                         instructor = "李教授"
                     )
                 )
@@ -96,6 +102,8 @@ class MainFragment : BrowseSupportFragment() {
             CourseCategory(
                 id = "chemistry",
                 name = "化学课程",
+                grade = 11,
+                subject = "化学",
                 videos = listOf(
                     Video(
                         id = "3", 
@@ -104,7 +112,8 @@ class MainFragment : BrowseSupportFragment() {
                         videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-3.mp4",
                         thumbnailUrl = "https://via.placeholder.com/320x180/FF9800/FFFFFF?text=化学",
                         duration = "42:20",
-                        category = "化学", 
+                        subject = "化学",
+                        grade = 11,
                         instructor = "王教授"
                     )
                 )
