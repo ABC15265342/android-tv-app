@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">教育电视</string>
+    <string name="browse_title">课程中心</string>
+    <string name="action_play">播放</string>
+    <string name="action_pause">暂停</string>
+    <string name="video_loading">正在加载视频...</string>
+    <string name="video_error">视频播放出错</string>
+    <string name="no_videos_found">未找到相关视频</string>
+    <string name="search_hint">搜索课程...</string>
+    <string name="category_math">数学</string>
+    <string name="category_physics">物理</string>
+    <string name="category_computer_science">计算机科学</string>
+    <string name="category_chemistry">化学</string>
+    <string name="category_biology">生物</string>
+    <string name="instructor_label">讲师:</string>
+    <string name="duration_label">时长:</string>
+    <string name="upload_date_label">上传日期:</string>
+    <string name="view_count_label">观看次数:</string>
+</resources>

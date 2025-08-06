@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "buildApk",
+			"type": "shell",
+			"command": "./gradlew",
+			"args": [
+				"assembleDebug",
+				"--stacktrace"
+			],
+			"group": "build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "cleanBuild",
+			"type": "shell", 
+			"command": "./gradlew",
+			"args": [
+				"clean"
+			],
+			"group": "build",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}
