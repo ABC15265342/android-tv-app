@@ -21,22 +21,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
-    - name: 🐘 设置Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-        gradle-version: wrapper
-        
-    - name: 📱 设置Android SDK
+    - name:  设置Android SDK
       uses: android-actions/setup-android@v3
       
     - name: 🔧 赋予gradlew执行权限
       run: chmod +x gradlew
       
     - name: 🧹 清理项目
-      run: ./gradlew clean
+      run: ./gradlew clean --stacktrace
       
     - name: 🔨 构建Debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace --info
       
     - name: 📦 上传APK文件
       uses: actions/upload-artifact@v4
