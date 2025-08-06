@@ -29,9 +29,6 @@ class MainFragment : BrowseSupportFragment() {
         // 设置标题
         title = getString(R.string.app_name)
         
-        // 设置头部图标
-        badgeDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_launcher_foreground)
-        
         // 禁用搜索
         isHeadersTransitionOnBackEnabled = true
         
