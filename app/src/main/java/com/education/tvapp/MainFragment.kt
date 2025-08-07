@@ -6,116 +6,74 @@ import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.*
 import androidx.core.content.ContextCompat
 import com.education.tvapp.models.Video
-import com.education.tvapp.models.CourseCategory
-import com.education.tvapp.models.Grade
-import com.education.tvapp.presenters.VideoPresenter
 
-/**
- * 主Fragment - 显示课程分类和视频列表
- */
 class MainFragment : BrowseSupportFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        
         setupUI()
         loadData()
     }
 
     private fun setupUI() {
-        // 设置品牌颜色
-        brandColor = ContextCompat.getColor(requireContext(), R.color.primary_color)
-        
-        // 设置标题
         title = getString(R.string.app_name)
-        
-        // 禁用搜索
-        isHeadersTransitionOnBackEnabled = true
-        
-        // 设置点击监听器
+        brandColor = ContextCompat.getColor(requireContext(), R.color.primary_color)
         onItemViewClickedListener = ItemViewClickedListener()
-        onItemViewSelectedListener = ItemViewSelectedListener()
     }
 
     private fun loadData() {
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         
-        // 创建示例数据
-        val categories = createSampleData()
+        // 创建简单的测试数据
+        val videos = createTestVideos()
+        val listRowAdapter = ArrayObjectAdapter(createVideoPresenter())
         
-        for (category in categories) {
-            val listRowAdapter = ArrayObjectAdapter(VideoPresenter())
-            for (video in category.videos) {
-                listRowAdapter.add(video)
-            }
-            
-            val header = HeaderItem(category.id.toLong(), category.name)
-            rowsAdapter.add(ListRow(header, listRowAdapter))
+        videos.forEach { video ->
+            listRowAdapter.add(video)
         }
         
+        val header = HeaderItem(1, "测试视频")
+        rowsAdapter.add(ListRow(header, listRowAdapter))
         adapter = rowsAdapter
     }
 
-    private fun createSampleData(): List<CourseCategory> {
+    private fun createTestVideos(): List<Video> {
         return listOf(
-            CourseCategory(
-                id = "math",
-                name = "数学课程",
-                grade = 9,
+            Video(
+                id = "1",
+                title = "测试视频1",
+                description = "这是一个测试视频",
+                videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-1.mp4",
+                thumbnailUrl = "",
+                duration = "10:00",
                 subject = "数学",
-                videos = listOf(
-                    Video(
-                        id = "1",
-                        title = "高等数学 - 微积分基础",
-                        description = "学习微积分的基本概念和应用",
-                        videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-1.mp4",
-                        thumbnailUrl = "https://via.placeholder.com/320x180/4CAF50/FFFFFF?text=数学",
-                        duration = "45:30",
-                        subject = "数学",
-                        grade = 9,
-                        instructor = "张教授"
-                    )
-                )
-            ),
-            CourseCategory(
-                id = "physics",
-                name = "物理课程",
-                grade = 10,
-                subject = "物理",
-                videos = listOf(
-                    Video(
-                        id = "2",
-                        title = "大学物理 - 力学基础",
-                        description = "物理力学的基本原理和定律",
-                        videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-2.mp4",
-                        thumbnailUrl = "https://via.placeholder.com/320x180/2196F3/FFFFFF?text=物理",
-                        duration = "50:15",
-                        subject = "物理",
-                        grade = 10,
-                        instructor = "李教授"
-                    )
-                )
-            ),
-            CourseCategory(
-                id = "chemistry",
-                name = "化学课程",
-                grade = 11,
-                subject = "化学",
-                videos = listOf(
-                    Video(
-                        id = "3", 
-                        title = "有机化学 - 基础理论",
-                        description = "有机化学的基本概念和反应机理",
-                        videoUrl = "https://sample-videos.com/zip/10/mp4/720/mp4-sample-3.mp4",
-                        thumbnailUrl = "https://via.placeholder.com/320x180/FF9800/FFFFFF?text=化学",
-                        duration = "42:20",
-                        subject = "化学",
-                        grade = 11,
-                        instructor = "王教授"
-                    )
-                )
+                grade = 9,
+                instructor = "测试老师"
             )
         )
+    }
+
+    private fun createVideoPresenter(): Presenter {
+        return object : Presenter() {
+            override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
+                val cardView = androidx.leanback.widget.ImageCardView(parent.context)
+                cardView.isFocusable = true
+                cardView.isFocusableInTouchMode = true
+                cardView.setMainImageDimensions(313, 176)
+                return ViewHolder(cardView)
+            }
+
+            override fun onBindViewHolder(viewHolder: ViewHolder, item: Any) {
+                val video = item as Video
+                val cardView = viewHolder.view as androidx.leanback.widget.ImageCardView
+                
+                cardView.titleText = video.title
+                cardView.contentText = video.description
+                cardView.mainImage = ContextCompat.getDrawable(cardView.context, R.drawable.default_background)
+            }
+
+            override fun onUnbindViewHolder(viewHolder: ViewHolder) {}
+        }
     }
 
     private inner class ItemViewClickedListener : OnItemViewClickedListener {
@@ -126,22 +84,10 @@ class MainFragment : BrowseSupportFragment() {
             row: Row?
         ) {
             if (item is Video) {
-                // 跳转到视频详情页面
                 val intent = Intent(activity, VideoDetailsActivity::class.java)
                 intent.putExtra("video", item)
                 startActivity(intent)
             }
-        }
-    }
-
-    private inner class ItemViewSelectedListener : OnItemViewSelectedListener {
-        override fun onItemSelected(
-            itemViewHolder: Presenter.ViewHolder?,
-            item: Any?,
-            rowViewHolder: RowPresenter.ViewHolder?,
-            row: Row?
-        ) {
-            // 可以在这里处理选中事件
         }
     }
 }
