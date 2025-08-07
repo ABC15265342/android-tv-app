@@ -10,6 +10,18 @@ import retrofit2.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+package com.education.tvapp.services
+
+import com.education.tvapp.models.*
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
 /**
  * 视频服务类 - 连接明诚教育网站API
  */
@@ -17,6 +29,77 @@ class VideoService {
     
     companion object {
         private const val BASE_URL = "http://43.138.218.45:3000/"
+        
+        // 获取默认的测试数据，当API不可用时使用
+        fun getDefaultVideos(): List<Video> {
+            return listOf(
+                Video(
+                    id = "math_001",
+                    title = "高等数学 - 微积分基础",
+                    description = "从基础概念到高级应用，全面掌握微积分知识",
+                    videoUrl = "http://43.138.218.45:3000/videos/math/calculus_basics.mp4",
+                    thumbnailUrl = "http://43.138.218.45:3000/thumbnails/math_001.jpg",
+                    duration = "45:30",
+                    subject = "数学",
+                    grade = 9,
+                    instructor = "张教授",
+                    uploadDate = "2024-01-15",
+                    viewCount = 1520
+                ),
+                Video(
+                    id = "physics_001",
+                    title = "物理学 - 牛顿力学",
+                    description = "理解牛顿三定律，掌握经典力学基础",
+                    videoUrl = "http://43.138.218.45:3000/videos/physics/newton_mechanics.mp4",
+                    thumbnailUrl = "http://43.138.218.45:3000/thumbnails/physics_001.jpg",
+                    duration = "38:45",
+                    subject = "物理",
+                    grade = 10,
+                    instructor = "李教授",
+                    uploadDate = "2024-01-20",
+                    viewCount = 982
+                ),
+                Video(
+                    id = "chemistry_001",
+                    title = "化学 - 有机化学基础",
+                    description = "了解有机化合物的结构、性质和反应",
+                    videoUrl = "http://43.138.218.45:3000/videos/chemistry/organic_basics.mp4",
+                    thumbnailUrl = "http://43.138.218.45:3000/thumbnails/chemistry_001.jpg",
+                    duration = "42:10",
+                    subject = "化学",
+                    grade = 11,
+                    instructor = "王教授",
+                    uploadDate = "2024-01-25",
+                    viewCount = 756
+                ),
+                Video(
+                    id = "chinese_001",
+                    title = "语文 - 古代文学赏析",
+                    description = "深入理解古代文学作品的思想内涵和艺术特色",
+                    videoUrl = "http://43.138.218.45:3000/videos/chinese/classical_literature.mp4",
+                    thumbnailUrl = "http://43.138.218.45:3000/thumbnails/chinese_001.jpg",
+                    duration = "36:25",
+                    subject = "语文",
+                    grade = 12,
+                    instructor = "陈教授",
+                    uploadDate = "2024-02-01",
+                    viewCount = 1234
+                ),
+                Video(
+                    id = "english_001",
+                    title = "英语 - 语法与写作",
+                    description = "提高英语语法掌握和写作技能",
+                    videoUrl = "http://43.138.218.45:3000/videos/english/grammar_writing.mp4",
+                    thumbnailUrl = "http://43.138.218.45:3000/thumbnails/english_001.jpg",
+                    duration = "28:50",
+                    subject = "英语",
+                    grade = 9,
+                    instructor = "Smith老师",
+                    uploadDate = "2024-02-05",
+                    viewCount = 678
+                )
+            )
+        }
     }
 
     private val retrofit = Retrofit.Builder()

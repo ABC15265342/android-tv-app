@@ -17,4 +17,10 @@
     <string name="duration_label">时长:</string>
     <string name="upload_date_label">上传日期:</string>
     <string name="view_count_label">观看次数:</string>
+    
+    <!-- ExoPlayer 控制器字符串 -->
+    <string name="exo_controls_play_description">播放</string>
+    <string name="exo_controls_pause_description">暂停</string>
+    <string name="exo_controls_fullscreen_enter_description">进入全屏</string>
+    <string name="exo_controls_fullscreen_exit_description">退出全屏</string>
 </resources>
